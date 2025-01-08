@@ -71,7 +71,8 @@ public class JWTUtil {
      * @return userId
      */
     public String getUserIdByToken(String token){
-        return Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getId();
+        Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+        return claims.get("id", String.class); // "id" 필드에 접근
     }
 
     /**
