@@ -1,12 +1,7 @@
-package domain.user.dao;
+package com.spring.springoauth2.domain.user.dao;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
-import java.util.List;
 
 @Getter
 @Setter

@@ -1,4 +1,4 @@
-package domain.user.dao;
+package com.spring.springoauth2.domain.user.dao;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
