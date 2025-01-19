@@ -1,7 +1,9 @@
 package com.spring.springoauth2.domain.controller;
 
+import com.spring.springoauth2.domain.service.KakaoLoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 @RequestMapping("")
 public class KakaoLoginController {
+    private final KakaoLoginService kakaoLoginService;
 
     /**
      * 로그인 이후의 행동 규정함
@@ -22,6 +25,8 @@ public class KakaoLoginController {
      */
     @GetMapping("/callback")
     public ResponseEntity<?> callback(@RequestParam String code){
+        String accessToken = kakaoLoginService.getAccessTokenFromKakao(code);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }
