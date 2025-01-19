@@ -1,6 +1,7 @@
 package com.spring.springoauth2.domain.service;
 
 import com.spring.springoauth2.domain.dto.KakaoTokenResponseDto;
+import com.spring.springoauth2.domain.dto.KakaoUserInfoResponseDto;
 import io.netty.handler.codec.http.HttpHeaderValues;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,5 +46,27 @@ public class KakaoLoginService {
 
 
         return kakaoTokenResponseDto.getAccessToken();
+    }
+
+    public KakaoUserInfoResponseDto getUserInfo(String accessToken){
+        KakaoUserInfoResponseDto kakaoUserInfoResponseDto =
+                WebClient.create(KAUTH_USER_URL_HOST).get()
+                        .uri(uriBuilder -> uriBuilder
+                                .scheme("https")
+                                .path("/v2/user/me")
+                                .build(true))
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
+                        .header(HttpHeaders.CONTENT_TYPE, HttpHeaderValues.APPLICATION_X_WWW_FORM_URLENCODED.toString())
+                        .retrieve()
+                        .bodyToMono(KakaoUserInfoResponseDto.class)
+                        .block();
+        log.info("[ Kakao Service ] Auth ID : {} ",
+                kakaoUserInfoResponseDto.getId());
+        log.info("[ Kakao Service ] NickName : {} ",
+                kakaoUserInfoResponseDto.getKakaoAccount().getProfile().getNickName());
+        log.info("[ Kakao Service ] ProfileImageUrl : {} ",
+                kakaoUserInfoResponseDto.getKakaoAccount().getProfile().getProfileImageUrl());
+
+        return kakaoUserInfoResponseDto;
     }
 }

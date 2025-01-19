@@ -1,5 +1,6 @@
 package com.spring.springoauth2.domain.controller;
 
+import com.spring.springoauth2.domain.dto.KakaoUserInfoResponseDto;
 import com.spring.springoauth2.domain.service.KakaoLoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,8 @@ public class KakaoLoginController {
     @GetMapping("/callback")
     public ResponseEntity<?> callback(@RequestParam String code){
         String accessToken = kakaoLoginService.getAccessTokenFromKakao(code);
+        KakaoUserInfoResponseDto userInfoResponseDto
+                = kakaoLoginService.getUserInfo(accessToken);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
