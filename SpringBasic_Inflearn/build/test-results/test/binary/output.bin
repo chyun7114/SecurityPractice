@@ -1,0 +1,3 @@
+Vkey = memberRepository1 value = com.hello.core.member.MemoryMemberRepository@aec50a1
+Wkey = memberRepository2 value = com.hello.core.member.MemoryMemberRepository@62da83ed
+¡beansOfType = {memberRepository1=com.hello.core.member.MemoryMemberRepository@aec50a1, memberRepository2=com.hello.core.member.MemoryMemberRepository@62da83ed}
